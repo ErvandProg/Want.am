@@ -2,11 +2,12 @@ import React from 'react'
 import products from "./../components/Product/dataBase";
 
 export default function Added() {
-	const data = {
-		id: products[0].products.length + products[1].products.length + 1,
+	let data = {
+		id: Math.floor(Math.random() * 1000000),
 		src: '',
 		title: '',
 		price: '',
+		isAdded: true,
 		category: ''
 	}
 
@@ -14,13 +15,14 @@ export default function Added() {
 		data[e.target.name] = e.target.value;
 	}
 
-
 	function save() {
 		if (data.src !== '' && data.title !== '' && data.price !== '') {
-			console.log(data);
+			if (data.category === "") {
+				data.category = "ՊԱՀԱՆՋՎԱԾ"
+			}
 			products.map((el) => {
 				el.title === data.category ? el.products.push(data) : ''
-			})
+			});
 		}
 	}
 
